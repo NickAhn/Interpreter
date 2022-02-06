@@ -1,3 +1,4 @@
+import re
 class Lexer:
     def __init__(self) -> None:
         self.t_types = {
@@ -7,11 +8,12 @@ class Lexer:
         }
 
 
-    def scan(list: input):
+
+    def scan(self, list: input):
         input_list = input.split() # separate inputs by delimiters (whitespaces)
         for input in input_list:
             currTokenPos = 0 #keep track of beginning of the token being analyzed #WE MIGHT NOT NEED THIS!
-            currToken = ""
+            currToken = "" # currToken = input[:1]
             for i in range(len(input)):
                 currToken += input[i]
                 if i == 0:
