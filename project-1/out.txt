@@ -1,5 +1,3 @@
-Line: 1
-Line: 2
-Line: 3
-Line: 4
-Line: 5
+Line: 34 + 89 - x * y23
+Line: cxo6y / 67z23 * 56& 34 * x
+Line: 2 + x
