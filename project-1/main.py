@@ -21,8 +21,8 @@ print(input_list)
 input_file.close()
 
 output_file = open("out.txt", "w")
-# update this later
-output_file.write("this is the new output")
+for x in input_list:
+    output_file.write("Line: " + x + "\n")
 output_file.close()
 
 token_types = {
