@@ -14,6 +14,16 @@ import re #regex library
 # for x in input_list:
 #     output_file.write("Line: " + x + "\n")
 
+input_file = open("in.txt", "r")
+input_list = input_file.read().splitlines()
+# delete this later
+print(input_list)
+input_file.close()
+
+output_file = open("out.txt", "w")
+# update this later
+output_file.write("this is the new output")
+output_file.close()
 
 token_types = {
     "IDENTIFIER" : "([a-z]|[A-Z]|)([a-z]|[A-Z]|[0-9])",
