@@ -1,3 +1,9 @@
+'''
+Nicolas Ahn
+Emily Yeh
+Phase 1.1: Scanner for Lexp
+'''
+
 import re
 
 output_file = open("out.txt", "a")
@@ -28,6 +34,7 @@ class Lexer:
                 if temp[0] == None:
                     print("ERROR PRINTING ", temp[1], "\n")
                     return []
+                #TODO: else: add temp[0] to list of tokens
                 x = temp[1]
 
         print("")

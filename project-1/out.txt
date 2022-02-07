@@ -21,12 +21,3 @@ Line:  2 + x
 + :  SYMBOL
 x :  IDENTIFIER
 
-Line:  abc 12&34
-abc :  IDENTIFIER
-12 :  NUMBER
-ERROR PRINTING  & 
-
-Line:  a12ikkkkkdlsidirifk 9876543
-a12ikkkkkdlsidirifk :  IDENTIFIER
-9876543 :  NUMBER
-
