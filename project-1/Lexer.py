@@ -14,28 +14,18 @@ class Lexer:
         }
 
     # Output: list of tokens
-    # def scan(self, input):
-    #     input_list = input.split()
+    def scan(self, input):
+        input_list = input.split()
 
-    #     errorFound = False
-    #     for input in input_list:  
-    #         x = input
-    #         while len(x) > 0:
-    #             # isMatch = False
-    #             # for key, val in self.t_types.items():
-    #             #     match = re.match(val, x)
-    #             #     if match:
-    #             #         print(key, ": ", x[:match.end()]) # just printing; put in list in the future
-    #             #         x = input[match.end():] # instead, x[:match.end()] == old x, then stop
-    #             #         isMatch = True
-                
-    #             # if isMatch == False:
-    #             #     errorFound = True
-    #             #     print("Match Not Found")
-    #             #     break
-    #             token = self.getTokenType(x)
-    #             if token == None:
-    #                 return []
+        errorFound = False
+        for input in input_list:  
+            x = input
+            while len(x) > 0:
+                temp = self.getTokenType(x)
+                if temp[0] == None:
+                    print("ERROR PRINTING ", temp[1])
+                    return []
+                x = temp[1]
 
     
     #returns a tuple containing Token Object and input string without it
@@ -44,23 +34,24 @@ class Lexer:
         for key, val in self.t_types.items():
             match = re.match(val,input)
             if match:
-                print(key, ": ", val)
+                print(match.group(0), ": ", key)
                 temp = input[match.end():]
-                return Token(key, val), temp
+                return Token(key, match.group(0)), temp
 
         #ERROR
-        return None
+        return None, input[0]
 
         
-input = "10sad"
-lexer_test = Lexer()
-test = lexer_test.getTokenType(input)
-print(test[0], test[1])
+# input = "34 + 89 - x * y23"
+# lexer_test = Lexer()
+# lexer_test.scan(input)
+# test = lexer_test.getTokenType(input)
+# print(test[0], test[1])
 
-input2 = test[1]
-test2 = lexer_test.getTokenType(input2)
-print(test2[0], test2[1])
-print(len(test2[1]))
+# input2 = test[1]
+# test2 = lexer_test.getTokenType(input2)
+# print(test2[0], test2[1])
+# print(len(test2[1]))
 
 
 
