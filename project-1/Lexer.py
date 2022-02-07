@@ -1,65 +1,127 @@
 import re
 
+class Token:
+    def __init__(self, type, value) -> None:
+        self.type = type
+        self.value = value
+
 class Lexer:
     def __init__(self) -> None:
         self.t_types = {
             "IDENTIFIER" : "([a-z]|[A-Z])([a-z]|[A-Z]|[0-9])*",
             "NUMBER" : "[0-9]+",
-            "SYMBOL" : "\+|\-|\*|/|\(|\)",    
+            "SYMBOL" : "\+|\-|\*|/|\(|\)",
         }
 
-
+    # Output: list of tokens
     # def scan(self, input):
-    #     input_list = input.split() # separate inputs by delimiters (whitespaces)
-    #     for input in input_list:
-    #         currTokenPos = 0 #keep track of beginning of the token being analyzed #WE MIGHT NOT NEED THIS!
-    #         currToken = "" # currToken = input[:1]
+    #     input_list = input.split()
 
-    #         for i in range(len(input)):
-    #             currToken += input[i]
-    #             print("- currToken: ", currToken)
-    #             if i == 0:
-    #                 continue
+    #     errorFound = False
+    #     for input in input_list:  
+    #         x = input
+    #         while len(x) > 0:
+    #             # isMatch = False
+    #             # for key, val in self.t_types.items():
+    #             #     match = re.match(val, x)
+    #             #     if match:
+    #             #         print(key, ": ", x[:match.end()]) # just printing; put in list in the future
+    #             #         x = input[match.end():] # instead, x[:match.end()] == old x, then stop
+    #             #         isMatch = True
                 
+    #             # if isMatch == False:
+    #             #     errorFound = True
+    #             #     print("Match Not Found")
+    #             #     break
+    #             token = self.getTokenType(x)
+    #             if token == None:
+    #                 return []
 
-    #             # if i == 0:
-    #             #     # prevTokenType = getTokenType of input[i] #WE MIGHT NOT NEED THIS!
-    #             #     continue
-                
-    #             if not self.getTokenType(currToken):
-    #                 print(self.getTokenType(currToken[:-1]), ": ", currToken[:-1])
-    #                 currTokenPos = i
+    
+    #returns a tuple containing Token Object and input string without it
+    #if it returns None, it found and Error
+    def getTokenType(self, input):
+        for key, val in self.t_types.items():
+            match = re.match(val,input)
+            if match:
+                print(key, ": ", val)
+                temp = input[match.end():]
+                return Token(key, val), temp
+
+        #ERROR
+        return None
+
+        
+input = "10sad"
+lexer_test = Lexer()
+test = lexer_test.getTokenType(input)
+print(test[0], test[1])
+
+input2 = test[1]
+test2 = lexer_test.getTokenType(input2)
+print(test2[0], test2[1])
+print(len(test2[1]))
 
 
-    # def getTokenType(self, buffer):
-    #     token_type = ""
-    #     for key, val in self.t_types.items():
-    #         match = re.match(val, buffer)
-    #         if match:
-    #             return key
-
-    #     return None
 
 
-# test = Lexer()
-# test.scan("10ad")
+# input = "10ad"
+# lexer_test.scan(input)             
+
+        
+
+
+        # x = input
+        # moreString = True
+        # while moreString:
+        #     for key, val in self.t_types.items():
+        #         match = re.match(val, x)
+        #         if match:
+        #             x = input[match.end():]
+        #             print(key, ": ", x) # just printing; put in list in the future
+        #         else:
+        #             #error is found.
+        #             print("Error printing ", x[0])
+        #             moreString = False
+        #             break
+
+        #     if match.end() == len(input)-1:
+        #         moreString = False
+
+'''
+for each input in input list:
+    given input:
+        - look for what type of token it matches.
+        - if match found, keep looking for other tokens starting from input[match.end:]
+        - if match.end() == input.length-1:
+            - stop
+    - 
+
+
+'''
 
 
 
+##################
 t_types = {
             "IDENTIFIER" : "([a-z]|[A-Z])([a-z]|[A-Z]|[0-9])*",
             "NUMBER" : "[0-9]+",
             "SYMBOL" : "\+|\-|\*|/|\(|\)",    
         }
 
-match = re.match(t_types["IDENTIFIER"], input)
-print(match)
-match = re.match(t_types["NUMBER"], input)
-print(match)
-match = re.match(t_types["SYMBOL"], input)
-print(match)
+# ''' TEST CODE '''
+# input = "ad"
+# match = re.match(t_types["IDENTIFIER"], input)
+# print(match)
+# print(match.group(0,1))
 
-#match fitrst instance, print, continue
+# match = re.match(t_types["NUMBER"], input)
+# print(match)
+# match = re.match(t_types["SYMBOL"], input)
+# print(match)
+
+
+
 
 
 
