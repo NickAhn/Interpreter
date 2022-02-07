@@ -5,7 +5,7 @@ import Lexer
 # Run program as: "python3 main.py <input-file> <output-file>"
 try:
     input_list = open(sys.argv[1]).read().splitlines()
-    output_file = open(sys.argv[2], "w")
+    output_file = open(sys.argv[2], "a")
 except:
     print("Failed to open file(s).")
     sys.exit(1)
@@ -13,27 +13,6 @@ except:
 lexer = Lexer.Lexer()
 
 for input in input_list:
-    print("Line: ", input)
+    # print("Line: ", input)
     lexer.scan(input)
-    print("")
-
-# output
-for x in input_list:
-    output_file.write("Line: " + x + "\n")
-
-# input_file = open("in.txt", "r")
-# input_list = input_file.read().splitlines()
-# # delete this later
-# print(input_list)
-# input_file.close()
-
-# output_file = open("out.txt", "w")
-# for x in input_list:
-#     output_file.write("Line: " + x + "\n")
-# output_file.close()
-
-# token_types = {
-#     "IDENTIFIER" : "([a-z]|[A-Z]|)([a-z]|[A-Z]|[0-9])",
-#     "NUMBER" : "[0-9]+",
-#     "SYMBOL" : "\+ | \- | \* | / | \( | \)",    
-# }
+    # print("")
