@@ -7,6 +7,7 @@ class Token:
         self.type = type
         self.value = value
 
+
 class Lexer:
     def __init__(self) -> None:
         self.t_types = {
@@ -15,35 +16,31 @@ class Lexer:
             "SYMBOL" : "\+|\-|\*|/|\(|\)",
         }
 
-    # Output: list of tokens
+
     def scan(self, input):
-        self.output("\nLine: " + input, output_file)  #
+        print("Line: ", input)
         input_list = input.split()
 
-        errorFound = False
         for input in input_list:  
             x = input
             while len(x) > 0:
                 temp = self.getTokenType(x)
                 if temp[0] == None:
-                    print("ERROR PRINTING ", temp[1])
-                    self.output("ERROR PRINTING " + temp[1], output_file)  #
+                    print("ERROR PRINTING ", temp[1], "\n")
                     return []
                 x = temp[1]
 
-
-    def output(self, input, output_file):
-        output_file.write(input + "\n")
+        print("")
 
     
-    #returns a tuple containing Token Object and input string without it
+    #Returns a tuple containing Token Object and a substring of the input
+    # string without the token found.
     #if it returns None, it found and Error
     def getTokenType(self, input):
         for key, val in self.t_types.items():
             match = re.match(val,input)
             if match:
                 print(match.group(0), ": ", key)
-                self.output(str(match.group(0)) + ": " + str(key), output_file)
                 temp = input[match.end():]
                 return Token(key, match.group(0)), temp
 

@@ -1,55 +1,32 @@
+Line:  34 + 89 - x * y23
+34 :  NUMBER
++ :  SYMBOL
+89 :  NUMBER
+- :  SYMBOL
+x :  IDENTIFIER
+* :  SYMBOL
+y23 :  IDENTIFIER
 
-Line: 34 + 89 - x * y23
-34: NUMBER
-+: SYMBOL
-89: NUMBER
--: SYMBOL
-x: IDENTIFIER
-*: SYMBOL
-y23: IDENTIFIER
+Line:  cxo6y / 67z23 * 56& 34 * x
+cxo6y :  IDENTIFIER
+/ :  SYMBOL
+67 :  NUMBER
+z23 :  IDENTIFIER
+* :  SYMBOL
+56 :  NUMBER
+ERROR PRINTING  & 
 
-Line: cxo6y / 67z23 * 56& 34 * x
-cxo6y: IDENTIFIER
-/: SYMBOL
-67: NUMBER
-z23: IDENTIFIER
-*: SYMBOL
-56: NUMBER
-ERROR PRINTING &
+Line:  2 + x
+2 :  NUMBER
++ :  SYMBOL
+x :  IDENTIFIER
 
-Line: 2 + x
-2: NUMBER
-+: SYMBOL
-x: IDENTIFIER
+Line:  abc 12&34
+abc :  IDENTIFIER
+12 :  NUMBER
+ERROR PRINTING  & 
 
-Line: 34 + 89 - x * y23
-34: NUMBER
-+: SYMBOL
-89: NUMBER
--: SYMBOL
-x: IDENTIFIER
-*: SYMBOL
-y23: IDENTIFIER
+Line:  a12ikkkkkdlsidirifk 9876543
+a12ikkkkkdlsidirifk :  IDENTIFIER
+9876543 :  NUMBER
 
-Line: cxo6y / 67z23 * 56& 34 * x
-cxo6y: IDENTIFIER
-/: SYMBOL
-67: NUMBER
-z23: IDENTIFIER
-*: SYMBOL
-56: NUMBER
-ERROR PRINTING &
-
-Line: 2 + x
-2: NUMBER
-+: SYMBOL
-x: IDENTIFIER
-
-Line: abc 12&34
-abc: IDENTIFIER
-12: NUMBER
-ERROR PRINTING &
-
-Line: a12ikkkkkdlsidirifk 9876543
-a12ikkkkkdlsidirifk: IDENTIFIER
-9876543: NUMBER
