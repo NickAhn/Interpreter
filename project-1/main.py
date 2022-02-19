@@ -14,6 +14,7 @@ def Scanner():
     try:
         input_list = open(sys.argv[1]).read().splitlines()
         sys.stdout = open(sys.argv[2], "w")
+
     except:
         print("Failed to open file(s).")
         sys.exit(1)
