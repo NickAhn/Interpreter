@@ -26,3 +26,6 @@ def Scanner():
 
 
 scanner = Scanner()
+# "\bif\b|\bthen\b|\belse\b|\bendif\b|\bwhile\b|\bdo\b|\bendwhile\b|\bskip\b"
+# match = re.match(r"\bif\b|\bthen\b","then");
+# print(match)

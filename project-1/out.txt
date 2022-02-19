@@ -14,10 +14,23 @@ cxo6y :  IDENTIFIER
 z23 :  IDENTIFIER
 * :  SYMBOL
 56 :  NUMBER
-ERROR PRINTING  & 
+ERROR READING  & 
 
 Line:  2 + x
 2 :  NUMBER
 + :  SYMBOL
 x :  IDENTIFIER
+
+Line:  catfood:=45
+catfood :  IDENTIFIER
+:= :  SYMBOL
+45 :  NUMBER
+
+Line:  while.
+while :  KEYWORD
+ERROR READING  . 
+
+Line:  if45)
+if45 :  IDENTIFIER
+) :  SYMBOL
 

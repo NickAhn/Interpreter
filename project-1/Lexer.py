@@ -17,9 +17,10 @@ class Token:
 class Lexer:
     def __init__(self) -> None:
         self.t_types = {
+            "KEYWORD" : r"\bif\b|\bthen\b|\belse\b|\bendif\b|\bwhile\b|\bdo\b|\bendwhile\b|\bskip\b", #\b refers to word boundaries; r needs to be added to work
             "IDENTIFIER" : "([a-z]|[A-Z])([a-z]|[A-Z]|[0-9])*",
             "NUMBER" : "[0-9]+",
-            "SYMBOL" : "\+|\-|\*|/|\(|\)|:=|;",
+            "SYMBOL" : "\+|\-|\*|/|\(|\)|:=|;"
         }
 
 
@@ -32,7 +33,7 @@ class Lexer:
             while len(x) > 0:
                 temp = self.getTokenType(x)
                 if temp[0] == None:
-                    print("ERROR PRINTING ", temp[1], "\n")
+                    print("ERROR READING ", temp[1], "\n")
                     return []
                 #TODO: else: add temp[0] to list of tokens
                 x = temp[1]
