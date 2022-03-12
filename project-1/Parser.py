@@ -68,7 +68,17 @@ class Parser:
     # factor ::= piece { / piece }
     def parceFactor(self):
         treeNode = self.parsePiece()
-        while self.tokens[0] == "/":
+        while self.tokens[0] == '-':
+            tempNode = copy.copy(treeNode) # create temp copy of treeNode
             # current node
-            treeNode = Tree()
-    
+            TreeNode = Tree()
+            treeNode.token = self.tokens[0]
+
+            treeNode.leftChild = tempNode 
+            treeNode.rightChild = self.parsePiece()
+
+            #consume token (putting consume token last to see if this works)
+            self.tokens.remove(0)
+        return treeNode
+
+
