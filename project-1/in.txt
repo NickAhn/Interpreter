@@ -4,3 +4,4 @@ cxo6y / 67z23 * 56& 34 * x
 catfood:=45
 while.
 if45)
+if x = 2 then

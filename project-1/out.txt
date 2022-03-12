@@ -34,3 +34,8 @@ Line:  if45)
 if45 :  IDENTIFIER
 ) :  SYMBOL
 
+Line:  if x = 2 then
+if :  KEYWORD
+x :  IDENTIFIER
+ERROR READING  = 
+
