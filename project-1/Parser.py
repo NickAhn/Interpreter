@@ -18,3 +18,4 @@ class Tree:
     
     def print(self):
         print(self.token.value, ":", self.token.type)
+
