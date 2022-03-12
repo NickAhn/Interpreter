@@ -13,6 +13,9 @@ class Token:
         self.type = type
         self.value = value
 
+    def print(self):
+        print(self.value, ":", self.type)
+
 
 class Lexer:
     def __init__(self) -> None:
@@ -25,8 +28,9 @@ class Lexer:
 
 
     def scan(self, input):
-        print("Line: ", input)
+        # print("Line: ", input)
         input_list = input.split()
+        token_list = []
 
         for input in input_list:  
             x = input
@@ -38,8 +42,11 @@ class Lexer:
                 #TODO: else: add temp[0] to list of tokens
                 x = temp[1]
 
-        print("")
-
+                # Creating Token Instance
+                token = temp[0]
+                token_list.append(token)
+        
+        return token_list
     
     #Returns a tuple containing Token Object and a substring of the input
     # string without the token found.
@@ -48,7 +55,7 @@ class Lexer:
         for key, val in self.t_types.items():
             match = re.match(val,input)
             if match:
-                print(match.group(0), ": ", key)
+                # print(match.group(0), ": ", key)
                 temp = input[match.end():]
                 return Token(key, match.group(0)), temp
 

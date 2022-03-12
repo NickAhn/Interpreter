@@ -1,4 +1,4 @@
 *.zip
 
-project-1/__pycache__
+project-1/__pycache__/*
 

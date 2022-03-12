@@ -7,6 +7,14 @@ x :  IDENTIFIER
 * :  SYMBOL
 y23 :  IDENTIFIER
 
+len  7
+(<Lexer.Token object at 0x7fab009a2310>, '') : 
+(<Lexer.Token object at 0x7fab009a24f0>, '') : 
+(<Lexer.Token object at 0x7fab009a2280>, '') : 
+(<Lexer.Token object at 0x7fab009a2160>, '') : 
+(<Lexer.Token object at 0x7fab009a2430>, '') : 
+(<Lexer.Token object at 0x7fab009a2f10>, '') : 
+(<Lexer.Token object at 0x7fab009a2550>, '') : 
 Line:  cxo6y / 67z23 * 56& 34 * x
 cxo6y :  IDENTIFIER
 / :  SYMBOL
@@ -16,26 +24,40 @@ z23 :  IDENTIFIER
 56 :  NUMBER
 ERROR READING  & 
 
+len  0
 Line:  2 + x
 2 :  NUMBER
 + :  SYMBOL
 x :  IDENTIFIER
 
+len  3
+(<Lexer.Token object at 0x7fab009a22b0>, '') : 
+(<Lexer.Token object at 0x7fab009a2460>, '') : 
+(<Lexer.Token object at 0x7fab009a21f0>, '') : 
 Line:  catfood:=45
 catfood :  IDENTIFIER
 := :  SYMBOL
 45 :  NUMBER
 
+len  3
+(<Lexer.Token object at 0x7fab009a22e0>, ':=45') : :=45
+(<Lexer.Token object at 0x7fab009a21c0>, '45') : 45
+(<Lexer.Token object at 0x7fab009a2400>, '') : 
 Line:  while.
 while :  KEYWORD
 ERROR READING  . 
 
+len  0
 Line:  if45)
 if45 :  IDENTIFIER
 ) :  SYMBOL
 
+len  2
+(<Lexer.Token object at 0x7fab009a2250>, ')') : )
+(<Lexer.Token object at 0x7fab009a23a0>, '') : 
 Line:  if x = 2 then
 if :  KEYWORD
 x :  IDENTIFIER
 ERROR READING  = 
 
+len  0

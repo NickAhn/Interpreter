@@ -13,7 +13,7 @@ def Scanner():
     # Run program as: "python3 main.py <input-file> <output-file>"
     try:
         input_list = open(sys.argv[1]).read().splitlines()
-        sys.stdout = open(sys.argv[2], "w")
+        # sys.stdout = open(sys.argv[2], "w")
 
     except:
         print("Failed to open file(s).")
@@ -22,10 +22,11 @@ def Scanner():
     lexer = Lexer.Lexer()
 
     for input in input_list:
-        lexer.scan(input)
+        tokens = lexer.scan(input)
+        for token in tokens:
+            token.print()
+
+    #TODO: create funciton to write file with token list
 
 
 scanner = Scanner()
-# "\bif\b|\bthen\b|\belse\b|\bendif\b|\bwhile\b|\bdo\b|\bendwhile\b|\bskip\b"
-# match = re.match(r"\bif\b|\bthen\b","then");
-# print(match)
