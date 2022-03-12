@@ -11,6 +11,9 @@ piece ::= element { * element }
 element ::= ( expression ) | NUMBER | IDENTIFIER
 '''
 
+import copy
+
+
 class Tree:
     def __init__(self) -> None:
         self.token = None
@@ -44,16 +47,25 @@ class Parser:
             return treeNode
         raise Exception("Not an identifier or token\n")
 
+
     # piece ::= element { * element }
     def parcePiece(self):
         treeNode = self.parseElement()
         while self.tokens[0] == "*":
+            tempNode = copy.copy(treeNode) # create temp copy of treeNode
             # current node
-            treeNode = Tree()
+            TreeNode = Tree()
             treeNode.token = self.tokens[0]
 
-            treeNode.leftChild = treeNode
+            treeNode.leftChild = tempNode 
             treeNode.rightChild = self.parseElement()
         return treeNode
 
+
+    # factor ::= piece { / piece }
+    def parceFactor(self):
+        treeNode = self.parsePiece()
+        while self.tokens[0] == "/":
+            # current node
+            treeNode = Tree()
     
