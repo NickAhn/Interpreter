@@ -31,7 +31,7 @@ class Parser:
     def parseElement(self):
         if self.tokens[0] == "(":
             self.tokens.remove(0)
-            treeNode = parseExpression()
+            treeNode = self.parseExpression()
             if self.tokens[0] == ")":
                 self.tokens.remove(0)
                 return treeNode
@@ -59,6 +59,9 @@ class Parser:
 
             treeNode.leftChild = tempNode 
             treeNode.rightChild = self.parseElement()
+
+            #consume token (putting consume token last to see if this works)
+            self.tokens.remove(0)
         return treeNode
 
 
