@@ -44,3 +44,16 @@ class Parser:
             return treeNode
         raise Exception("Not an identifier or token\n")
 
+    # piece ::= element { * element }
+    def parcePiece(self):
+        treeNode = self.parseElement()
+        while self.tokens[0] == "*":
+            # current node
+            treeNode = Tree()
+            treeNode.token = self.tokens[0]
+
+            treeNode.leftChild = treeNode
+            treeNode.rightChild = self.parseElement()
+        return treeNode
+
+    
