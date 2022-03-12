@@ -11,13 +11,10 @@ piece ::= element { * element }
 element ::= ( expression ) | NUMBER | IDENTIFIER
 '''
 
-from sqlalchemy import null
-
-
 class Tree:
     def __init__(self, token) -> None:
         self.token = token
-        self.leftChild = self.rightChild = null
+        self.leftChild = self.rightChild = None
     
     def print(self):
         print(self.token.value, ":", self.token.type)
