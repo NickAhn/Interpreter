@@ -12,8 +12,8 @@ element ::= ( expression ) | NUMBER | IDENTIFIER
 '''
 
 class Tree:
-    def __init__(self, token) -> None:
-        self.token = token
+    def __init__(self) -> None:
+        self.token = None
         self.leftChild = self.rightChild = None
     
     def print(self):
@@ -23,7 +23,24 @@ class Tree:
 class Parser:
     def __init__(self, tokens) -> None:
         self.tokens = tokens
+        self.treeNode = Tree()
 
     def parseElement(self):
-        
+        if self.tokens[0] == "(":
+            self.tokens.remove(0)
+            treeNode = parseExpression()
+            if self.tokens[0] == ")":
+                self.tokens.remove(0)
+                return treeNode
+            else
+                raise Exception("Not an expression\n")
+        elif self.tokens[0].type == "NUMBER":
+            treeNode = Tree()
+            treeNode.token = self.tokens[0]
+            return treeNode
+        elif self.tokens[0].type == "IDENTIFIER":
+            treeNode = Tree()
+            treeNode.token = self.tokens[0]
+            return treeNode
+        raise Exception("Not an identifier or token\n")
 
