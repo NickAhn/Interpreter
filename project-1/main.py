@@ -28,6 +28,13 @@ for input in input_list:
     for token in tokens:
         print(token)
         output_file.write(str(token)+"\n") 
-    output_file.write("\n") 
+    output_file.write("\n")
+
+
 
 #TODO: create funciton to write file with token list
+
+# print("\nAST:\n")
+#         parser = Parser.Parser(tokens)
+#         treeNode = parser.parseExpression()
+#         treeNode.inorder(treeNode, 0)

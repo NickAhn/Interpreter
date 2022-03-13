@@ -41,7 +41,8 @@ class Lexer:
                 temp = self.getTokenType(x)
                 if temp[0] == None:
                     print("ERROR READING ", temp[1], "\n")
-                    return []
+                    token_list.append("ERROR READING \"" + temp[1] + "\"\n")
+                    return token_list
                 #TODO: else: add temp[0] to list of tokens
                 x = temp[1]
 

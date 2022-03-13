@@ -8,6 +8,14 @@ x:IDENTIFIER
 y23:IDENTIFIER
 
 Line: cxo6y / 67z23 * 56& 34 * x
+cxo6y:IDENTIFIER
+/:SYMBOL
+67:NUMBER
+z23:IDENTIFIER
+*:SYMBOL
+56:NUMBER
+ERROR READING "&"
+
 
 Line: 2 + x
 2:NUMBER
@@ -20,10 +28,24 @@ catfood:IDENTIFIER
 45:NUMBER
 
 Line: while.
+while:KEYWORD
+ERROR READING "."
+
 
 Line: if45)
 if45:IDENTIFIER
 ):SYMBOL
 
 Line: if x = 2 then
+if:KEYWORD
+x:IDENTIFIER
+ERROR READING "="
+
+
+Line: if x := 2 then
+if:KEYWORD
+x:IDENTIFIER
+:=:SYMBOL
+2:NUMBER
+then:KEYWORD
 
