@@ -1,8 +1,7 @@
 '''
-IDENIFIER =([a-z] | [A-Z])([a-z] | [A-Z] | [0-9])*
-NUMBER =[0-9]+
-SYMBOL =\+ | \- | \* | / | \( | \) | := | ;
-KEYWORD =if | then | else | endif | while | do | endwhile | skip
+Nicolas Ahn
+Emily Yeh
+Phase 2.1 Parser for expressions
 '''
 
 import copy
@@ -23,7 +22,7 @@ class Tree:
             return
         str = "\t"*spaces
         # self.print(node)
-        print(str, node.token.value, ":", node.token.type)
+        print(str, node.token)
         self.inorder(node.leftChild, spaces+1)
         self.inorder(node.rightChild, spaces+1)
 
@@ -140,7 +139,7 @@ tokens = lexer.scan(input)
 print("-- input: --")
 print(input)
 for token in tokens:
-    token.print()
+    print(token)
 
 print("\n-- Starting Parser: --")
 parser = Parser(tokens)

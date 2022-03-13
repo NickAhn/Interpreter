@@ -13,8 +13,11 @@ class Token:
         self.type = type
         self.value = value
 
-    def print(self):
-        print(self.value, ":", self.type)
+    # def print(self):
+    #     print(self.value, ":", self.type)
+    
+    def __str__(self) -> str:
+        return self.value + ":" + self.type
 
 
 class Lexer:
