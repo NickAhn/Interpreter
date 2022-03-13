@@ -40,3 +40,5 @@ for input in input_list:
         parser = Parser.Parser(tokens)
         treeNode = parser.parseExpression()
         output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
+
+print("Scanning and Parsing Complete!\nCheck", sys.argv[2], "to see output")
