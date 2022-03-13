@@ -12,6 +12,8 @@ import Lexer
 # Run program as: "python3 main.py <input-file> <output-file>"
 try:
     input_list = open(sys.argv[1]).read().splitlines()
+    output_file = open(sys.argv[2], "a")
+    output_file.truncate(0)
     # sys.stdout = open(sys.argv[2], "w")
 
 except:
@@ -22,7 +24,10 @@ lexer = Lexer.Lexer()
 
 for input in input_list:
     tokens = lexer.scan(input)
+    output_file.write("Line: " + input + "\n")
     for token in tokens:
         print(token)
+        output_file.write(str(token)+"\n") 
+    output_file.write("\n") 
 
 #TODO: create funciton to write file with token list

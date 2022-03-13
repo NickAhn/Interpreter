@@ -1,0 +1,29 @@
+Line: 34 + 89 - x * y23
+34:NUMBER
++:SYMBOL
+89:NUMBER
+-:SYMBOL
+x:IDENTIFIER
+*:SYMBOL
+y23:IDENTIFIER
+
+Line: cxo6y / 67z23 * 56& 34 * x
+
+Line: 2 + x
+2:NUMBER
++:SYMBOL
+x:IDENTIFIER
+
+Line: catfood:=45
+catfood:IDENTIFIER
+:=:SYMBOL
+45:NUMBER
+
+Line: while.
+
+Line: if45)
+if45:IDENTIFIER
+):SYMBOL
+
+Line: if x = 2 then
+
