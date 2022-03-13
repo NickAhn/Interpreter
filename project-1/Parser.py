@@ -144,20 +144,20 @@ class Parser:
         return treeNode
     
 
-# testing
-input = "3 * (5 + 2 / x - 1)"
-lexer = Lexer.Lexer()
-tokens = lexer.scan(input)
-print("Tokens:\n")
-for token in tokens:
-    print(token)
+# # testing
+# input = "3 * (5 + 2 / x - 1)"
+# lexer = Lexer.Lexer()
+# tokens = lexer.scan(input)
+# print("Tokens:\n")
+# for token in tokens:
+#     print(token)
 
-print("\nAST:\n")
-parser = Parser(tokens)
-treeNode = parser.parseExpression()
-# treeNode.inorder(treeNode, 0)
-print("------------stirng")
-print(treeNode.inorderString(treeNode, 0))
+# print("\nAST:\n")
+# parser = Parser(tokens)
+# treeNode = parser.parseExpression()
+# # treeNode.inorder(treeNode, 0)
+# print("------------stirng")
+# print(treeNode.inorderString(treeNode, 0))
 
 
 

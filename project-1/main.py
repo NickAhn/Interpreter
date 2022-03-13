@@ -31,7 +31,7 @@ for input in input_list:
     tokens = lexer.scan(input)
     output_file.write("Line: " + input + "\n")
     for token in tokens:
-        print(token)
+        # print(token)
         output_file.write(str(token)+"\n") 
     output_file.write("\n")
 
@@ -40,12 +40,3 @@ for input in input_list:
         parser = Parser.Parser(tokens)
         treeNode = parser.parseExpression()
         output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
-
-
-
-#TODO: create funciton to write file with token list
-
-# print("\nAST:\n")
-#         parser = Parser.Parser(tokens)
-#         treeNode = parser.parseExpression()
-#         treeNode.inorder(treeNode, 0)
