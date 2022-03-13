@@ -16,16 +16,26 @@ class Tree:
     def print(self, node):
         print(node.token.value, ":", node.token.type)
 
-    def inorder(self, node, spaces):
+    def printInorder(self, node, spaces):
         if node == None:
             return
         str = "\t"*spaces
         # self.print(node)
         print(str, node.token)
-        self.inorder(node.leftChild, spaces+1)
-        self.inorder(node.rightChild, spaces+1)
+        self.printInOrder(node.leftChild, spaces+1)
+        self.printInOrder(node.rightChild, spaces+1)
 
-    # def inorderString(self, node, spaces, str):
+    def inorderString(self, node, spaces):
+        # finalWord = word
+        if node == None:
+            return ""
+        tabs = "\t"*spaces
+        # word += tabs + str(node.token)
+        ast = tabs + str(node.token) + "\n"
+        ast += self.inorderString(node.leftChild, spaces+1)
+        ast += self.inorderString(node.rightChild, spaces+1)
+        return ast
+
 
 
 
@@ -134,18 +144,20 @@ class Parser:
         return treeNode
     
 
-# # testing
-# input = "3 * (5 + 2 / x - 1)"
-# lexer = Lexer.Lexer()
-# tokens = lexer.scan(input)
-# print("Tokens:\n")
-# for token in tokens:
-#     print(token)
+# testing
+input = "3 * (5 + 2 / x - 1)"
+lexer = Lexer.Lexer()
+tokens = lexer.scan(input)
+print("Tokens:\n")
+for token in tokens:
+    print(token)
 
-# print("\nAST:\n")
-# parser = Parser(tokens)
-# treeNode = parser.parseExpression()
+print("\nAST:\n")
+parser = Parser(tokens)
+treeNode = parser.parseExpression()
 # treeNode.inorder(treeNode, 0)
+print("------------stirng")
+print(treeNode.inorderString(treeNode, 0))
 
 
 
