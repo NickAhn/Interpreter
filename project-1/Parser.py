@@ -56,24 +56,24 @@ class Parser:
     # element ::= ( expression ) | NUMBER | IDENTIFIER
     def parseElement(self):
         # check for (expression)
-        if self.tokens[0].value == "(":
+        if len(self.tokens) != 0 and self.tokens[0].value == "(":
             self.tokens.pop(0)
             treeNode = self.parseExpression()
-            if self.tokens[0].value == ")":
+            if len(self.tokens) != 0 and self.tokens[0].value == ")":
                 self.tokens.pop(0)
                 return treeNode
             else:
                 raise Exception("Not an expression\n")
         
         #check for NUMBER
-        elif self.tokens[0].type == "NUMBER":
+        elif len(self.tokens) != 0 and self.tokens[0].type == "NUMBER":
             treeNode = Tree()
             treeNode.token = self.tokens[0]
             self.tokens.pop(0).value
             return treeNode
 
         # check for IDENTIFIER
-        elif self.tokens[0].type == "IDENTIFIER":
+        elif len(self.tokens) != 0 and self.tokens[0].type == "IDENTIFIER":
             treeNode = Tree()
             treeNode.token = self.tokens[0]
             self.tokens.pop(0)
