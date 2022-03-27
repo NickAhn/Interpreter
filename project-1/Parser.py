@@ -11,19 +11,11 @@ import Lexer
 class Tree:
     def __init__(self) -> None:
         self.token = None
-        self.leftChild = self.rightChild = None
+        self.leftChild = self.middleChild = self.rightChild = None
+
     
     def print(self, node):
         print(node.token.value, ":", node.token.type)
-
-    def printInorder(self, node, spaces):
-        if node == None:
-            return
-        str = "\t"*spaces
-        # self.print(node)
-        print(str, node.token)
-        self.printInOrder(node.leftChild, spaces+1)
-        self.printInOrder(node.rightChild, spaces+1)
 
     def inorderString(self, node, spaces):
         # finalWord = word
@@ -33,6 +25,7 @@ class Tree:
         # word += tabs + str(node.token)
         ast = tabs + str(node.token) + "\n"
         ast += self.inorderString(node.leftChild, spaces+1)
+        ast += self.inorderString(node.middleChild, spaces+1)
         ast += self.inorderString(node.rightChild, spaces+1)
         return ast
 
@@ -58,7 +51,27 @@ class Parser:
         self.tokens = tokens
         self.treeNode = Tree()
 
+    # whilestatement ::= while <expression> do <statement> endwhile
+    def parseWhile(self):
+        if len(self.tokens) != 0 and self.tokens[0].value == "while":
+            # while <expression>
+            treeNode = Tree()
+            treeNode.token = self.tokens[0]
+            self.tokens.pop(0)
 
+            treeNode.leftChild = self.parseExpression()
+
+            #do <statement>
+            if len(self.tokens) != 0 and self.tokens[0].value == "do":
+                self.tokens.pop(0)
+                treeNode.right = self.parseStatement()
+                if len(self.tokens) != 0 and self.tokens[0].value == "endwhile":
+                    return treeNode
+                raise Exception("Not a while-loop: missing an \"endwhile\" token")
+            else:
+                raise Exception("Not a while-loop: missing a \"do\" token")
+
+            
 
     # element ::= ( expression ) | NUMBER | IDENTIFIER
     def parseElement(self):

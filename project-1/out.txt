@@ -1,24 +1,6 @@
-Line: 3 * (5 + 2 / x - 1)
-3:NUMBER
-*:SYMBOL
-(:SYMBOL
-5:NUMBER
-+:SYMBOL
-2:NUMBER
-/:SYMBOL
+Line: while x = 2 then
+while:KEYWORD
 x:IDENTIFIER
--:SYMBOL
-1:NUMBER
-):SYMBOL
+ERROR READING "="
 
-AST:
-*:SYMBOL
-	3:NUMBER
-	+:SYMBOL
-		5:NUMBER
-		-:SYMBOL
-			/:SYMBOL
-				2:NUMBER
-				x:IDENTIFIER
-			1:NUMBER
 
