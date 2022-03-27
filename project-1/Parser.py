@@ -52,7 +52,24 @@ class Parser:
         self.tokens = tokens
         self.treeNode = Tree()
 
-    # TODO: create raise Exception function and refactor code?        
+    # TODO: create raise Exception function and refactor code?
+
+    def parseAssignment(self):
+        treeNode = Tree()
+        if len(self.tokens) != 0 and self.tokens[0].type == "IDENTIFIER":
+            treeNode.leftChild = self.tokens[0]
+            self.tokens.pop(0)
+
+            if len(self.tokens) != 0 and self.tokens[0].value == ":=":
+                treeNode.token = self.tokens[0]
+                self.tokens.pop(0)
+
+                treeNode.rightChild = self.parseExpression()
+            else:
+                raise Exception("Not an Assignment: missing \":=\"")
+        
+        raise Exception("Not an Assignment")
+        
 
     #ifstatement ::= if <expression> then <statement> else <statement> endif
     def parseIf(self):
