@@ -149,7 +149,42 @@ class Parser:
             treeNode.leftChild = tempNode 
             treeNode.rightChild = self.parseTerm()            
         return treeNode
-    
+
+
+    # statement ::= basestatement { ; basestatement }
+    def parseStatement(self):
+        treeNode = self.parseBaseStatement()
+        while len(self.tokens) != 0 and self.tokens[0].value == ';':
+            tempNode = copy.copy(treeNode)
+
+            treeNode.token = self.tokens[0]
+            self.tokens.pop(0)
+            treeNode.leftChild = tempNode
+            treeNode.rightChild = self.parseBaseStatement()
+        return treeNode
+
+
+    #basestatement ::= assignment | ifstatement | whilestatement | skip
+    def parseBaseStatement(self):
+        # check for assignment
+        if len(self.tokens) != 0 and self.tokens[0].type == "IDENTIFIER":
+            return parseAssignment();
+
+        # check for ifStatement
+        elif len(self.tokens) != 0 and self.tokens[0].value == "if":
+            return parseIfStatement();
+
+        # check for whileStatement
+        elif len(self.tokens) != 0 and self.tokens[0].value == "while":
+            return parseWhileStatement();
+
+        # check for skip
+        elif len(self.tokens) != 0 and self.tokens[0].value == "skip":
+            return parseSkip();
+
+        # ERROR
+        raise Exception("Not a base statement\n")
+
 
 # # testing
 # input = "3 * (5 + 2 / x - 1)"
