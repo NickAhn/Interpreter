@@ -160,7 +160,7 @@ class Parser:
             #do <statement>
             if len(self.tokens) != 0 and self.tokens[0].value == "do":
                 self.tokens.pop(0)
-                treeNode.right = self.parseStatement()
+                treeNode.rightChild = self.parseStatement()
                 if len(self.tokens) != 0 and self.tokens[0].value == "endwhile":
                     return treeNode
                 raise Exception("Not a while-loop: missing an \"endwhile\" token")

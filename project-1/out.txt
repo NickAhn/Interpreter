@@ -58,4 +58,15 @@ AST:
 		-:SYMBOL
 			x:IDENTIFIER
 			y:IDENTIFIER
+		;:SYMBOL
+			:=:SYMBOL
+				z:IDENTIFIER
+				+:SYMBOL
+					z:IDENTIFIER
+					y:IDENTIFIER
+			:=:SYMBOL
+				y:IDENTIFIER
+				+:SYMBOL
+					y:IDENTIFIER
+					1:NUMBER
 
