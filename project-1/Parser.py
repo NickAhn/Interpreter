@@ -102,7 +102,7 @@ class Parser:
                 treeNode  element
             '''
             tempNode = copy.copy(treeNode) # create copy of treeNode to be used as left child of current node
-            # treeNode = Tree() # current node
+            
             treeNode.token = self.tokens[0] 
             self.tokens.pop(0)
             treeNode.leftChild = tempNode
@@ -117,7 +117,7 @@ class Parser:
         # create {/ piece }
         while len(self.tokens) != 0 and self.tokens[0].value == '/':
             tempNode = copy.copy(treeNode) # create temp copy of treeNode to be used as left child of current node
-            # treeNode = Tree() # current node
+            
             treeNode.token = self.tokens[0]
             self.tokens.pop(0)
             treeNode.leftChild = tempNode
@@ -130,7 +130,7 @@ class Parser:
         treeNode = self.parseFactor()
         while len(self.tokens) != 0 and self.tokens[0].value == '-':
             tempNode = copy.copy(treeNode) # create temp copy of treeNode to be used as left child of current node
-            # treeNode = Tree() # current node
+            
             treeNode.token = self.tokens[0]
             self.tokens.pop(0)
             treeNode.leftChild = tempNode 
@@ -143,7 +143,7 @@ class Parser:
         treeNode = self.parseTerm()
         while len(self.tokens) != 0 and self.tokens[0].value == '+':
             tempNode = copy.copy(treeNode)
-            # treeNode = Tree()
+            
             treeNode.token = self.tokens[0]
             self.tokens.pop(0)
             treeNode.leftChild = tempNode 
