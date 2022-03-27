@@ -239,19 +239,19 @@ class Parser:
     def parseBaseStatement(self):
         # check for assignment
         if len(self.tokens) != 0 and self.tokens[0].type == "IDENTIFIER":
-            return parseAssignment();
+            return self.parseAssignment()
 
         # check for ifStatement
         elif len(self.tokens) != 0 and self.tokens[0].value == "if":
-            return parseIfStatement();
+            return self.parseIfStatement()
 
         # check for whileStatement
         elif len(self.tokens) != 0 and self.tokens[0].value == "while":
-            return parseWhileStatement();
+            return self.parseWhileStatement()
 
         # check for skip
         elif len(self.tokens) != 0 and self.tokens[0].value == "skip":
-            return parseSkip();
+            return self.parseSkip()
 
         # ERROR
         raise Exception("Not a base statement\n")
