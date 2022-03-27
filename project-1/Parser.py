@@ -41,6 +41,12 @@ class Tree:
 
 class Parser:
     ''' - EBNF:
+        statement ::= basestatement { ; basestatement }
+        basestatement ::= assignment | ifstatement | whilestatement | skip
+        assignmet ::= IDENTIFIER := <expression>
+        ifstatement ::= if <expression> then <statement> else <statement> endif
+        whilestatement ::= while <expression> do <statement> endwhile
+
         expression ::= term { + term }
         term ::= factor { - factor }
         factor ::= piece { / piece }
