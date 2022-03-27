@@ -5,6 +5,7 @@ Phase 2.1 Parser for expressions
 '''
 
 import copy
+from logging import raiseExceptions
 import Lexer
 
 
@@ -36,7 +37,7 @@ class Parser:
     ''' - EBNF:
         statement ::= basestatement { ; basestatement }
         basestatement ::= assignment | ifstatement | whilestatement | skip
-        assignmet ::= IDENTIFIER := <expression>
+        assignment ::= IDENTIFIER := <expression>
         ifstatement ::= if <expression> then <statement> else <statement> endif
         whilestatement ::= while <expression> do <statement> endwhile
 
@@ -50,6 +51,46 @@ class Parser:
     def __init__(self, tokens) -> None:
         self.tokens = tokens
         self.treeNode = Tree()
+
+    # TODO: create raise Exception function and refactor code?        
+
+    #ifstatement ::= if <expression> then <statement> else <statement> endif
+    def parseIf(self):
+        if len(self.tokens) != 0 and self.tokens[0].value == "if":
+            # if <expression>
+            treeNode = Tree() 
+            treeNode.token = self.tokens[0] # root node = "if"
+            self.tokens.pop(0)
+
+            treeNode.leftChild = self.parseExpression()
+
+            # then <statement>
+            if len(self.tokens) != 0 and self.tokens[0].value == "then":
+                self.tokens.pop(0)
+                treeNode.middleChild = self.parseExpression()
+
+                # else <expression>
+                if len(self.tokens) != 0 and self.tokens[0].value == "else":
+                    self.tokens.pop(0)
+                    treeNode.rightChild = self.parseStatement()
+
+                    # check for endif
+                    if len(self.tokens) != 0 and self.tokens[0].value == "endif":
+                        self.tokens.pop(0)
+                        return treeNode
+                    else:
+                        raise Exception("Not an if-statement: missing an \"endif\" token")
+                else:
+                    raise Exception("Not an if-statement: missing an \"else\" token")
+            else:
+                raise Exception("Not an if-statement: missing a \"then\" token")
+
+            
+        raise Exception("Not an if-statement")
+
+
+            # endif
+        
 
     # whilestatement ::= while <expression> do <statement> endwhile
     def parseWhile(self):
