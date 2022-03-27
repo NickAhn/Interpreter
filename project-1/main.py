@@ -26,6 +26,7 @@ except:
     sys.exit(1)
 
 lexer = Lexer.Lexer()
+tokens_list = []
 
 for input in input_list:
     tokens = lexer.scan(input)
@@ -33,12 +34,22 @@ for input in input_list:
     for token in tokens:
         # print(token)
         output_file.write(str(token)+"\n") 
+        tokens_list.append(token)
     output_file.write("\n")
 
-    if(testParser):
+    # if(testParser):
+    #     output_file.write("AST:\n")
+    #     parser = Parser.Parser(tokens)
+    #     # treeNode = parser.parseExpression()
+    #     treeNode = parser.parseStatement()
+    #     output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
+
+if(testParser):
         output_file.write("AST:\n")
-        parser = Parser.Parser(tokens)
-        treeNode = parser.parseExpression()
+        parser = Parser.Parser(tokens_list)
+        # treeNode = parser.parseExpression()
+        treeNode = parser.parseStatement()
         output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
+
 
 print("Scanning and Parsing Complete!\nCheck", sys.argv[2], "to see output")

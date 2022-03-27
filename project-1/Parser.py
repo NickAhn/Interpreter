@@ -18,7 +18,7 @@ class Tree:
     def print(self, node):
         print(node.token.value, ":", node.token.type)
 
-    def inorderString(self, node, spaces):
+    def inorderString(self, node, spaces:int):
         # finalWord = word
         if node == None:
             return ""
@@ -54,10 +54,46 @@ class Parser:
 
     # TODO: create raise Exception function and refactor code?
 
+    # statement ::= basestatement { ; basestatement }
+    def parseStatement(self):
+        treeNode = self.parseBaseStatement()
+        while len(self.tokens) != 0 and self.tokens[0].value == ';':
+            tempNode = copy.copy(treeNode)
+
+            treeNode.token = self.tokens[0]
+            self.tokens.pop(0)
+            treeNode.leftChild = tempNode
+            treeNode.rightChild = self.parseBaseStatement()
+        return treeNode
+
+
+    #basestatement ::= assignment | ifstatement | whilestatement | skip
+    def parseBaseStatement(self):
+        # check for assignment
+        if len(self.tokens) != 0 and self.tokens[0].type == "IDENTIFIER":
+            return self.parseAssignment()
+
+        # check for ifStatement
+        elif len(self.tokens) != 0 and self.tokens[0].value == "if":
+            return self.parseIfStatement()
+
+        # check for whileStatement
+        elif len(self.tokens) != 0 and self.tokens[0].value == "while":
+            return self.parseWhileStatement()
+
+        # check for skip //TODO: skip
+        elif len(self.tokens) != 0 and self.tokens[0].value == "skip":
+            return self.parseSkip()
+
+        # ERROR
+        raise Exception("Not a base statement\n")
+
+    # assignment ::= IDENTIFIER := <expression>
     def parseAssignment(self):
         treeNode = Tree()
         if len(self.tokens) != 0 and self.tokens[0].type == "IDENTIFIER":
-            treeNode.leftChild = self.tokens[0]
+            treeNode.leftChild = Tree()
+            treeNode.leftChild.token = self.tokens[0]
             self.tokens.pop(0)
 
             if len(self.tokens) != 0 and self.tokens[0].value == ":=":
@@ -67,12 +103,14 @@ class Parser:
                 treeNode.rightChild = self.parseExpression()
             else:
                 raise Exception("Not an Assignment: missing \":=\"")
+
+            return treeNode
         
         raise Exception("Not an Assignment")
         
 
     #ifstatement ::= if <expression> then <statement> else <statement> endif
-    def parseIf(self):
+    def parseIfStatement(self):
         if len(self.tokens) != 0 and self.tokens[0].value == "if":
             # if <expression>
             treeNode = Tree() 
@@ -110,7 +148,7 @@ class Parser:
         
 
     # whilestatement ::= while <expression> do <statement> endwhile
-    def parseWhile(self):
+    def parseWhileStatement(self):
         if len(self.tokens) != 0 and self.tokens[0].value == "while":
             # while <expression>
             treeNode = Tree()
@@ -220,41 +258,6 @@ class Parser:
             treeNode.leftChild = tempNode 
             treeNode.rightChild = self.parseTerm()            
         return treeNode
-
-
-    # statement ::= basestatement { ; basestatement }
-    def parseStatement(self):
-        treeNode = self.parseBaseStatement()
-        while len(self.tokens) != 0 and self.tokens[0].value == ';':
-            tempNode = copy.copy(treeNode)
-
-            treeNode.token = self.tokens[0]
-            self.tokens.pop(0)
-            treeNode.leftChild = tempNode
-            treeNode.rightChild = self.parseBaseStatement()
-        return treeNode
-
-
-    #basestatement ::= assignment | ifstatement | whilestatement | skip
-    def parseBaseStatement(self):
-        # check for assignment
-        if len(self.tokens) != 0 and self.tokens[0].type == "IDENTIFIER":
-            return self.parseAssignment()
-
-        # check for ifStatement
-        elif len(self.tokens) != 0 and self.tokens[0].value == "if":
-            return self.parseIfStatement()
-
-        # check for whileStatement
-        elif len(self.tokens) != 0 and self.tokens[0].value == "while":
-            return self.parseWhileStatement()
-
-        # check for skip
-        elif len(self.tokens) != 0 and self.tokens[0].value == "skip":
-            return self.parseSkip()
-
-        # ERROR
-        raise Exception("Not a base statement\n")
 
 
 # # testing

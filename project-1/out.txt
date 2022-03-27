@@ -1,6 +1,61 @@
-Line: while x = 2 then
+Line: z := 0;
+z:IDENTIFIER
+:=:SYMBOL
+0:NUMBER
+;:SYMBOL
+
+Line: x := 10;
+x:IDENTIFIER
+:=:SYMBOL
+10:NUMBER
+;:SYMBOL
+
+Line: y := 0;
+y:IDENTIFIER
+:=:SYMBOL
+0:NUMBER
+;:SYMBOL
+
+Line: while x-y do
 while:KEYWORD
 x:IDENTIFIER
-ERROR READING "="
+-:SYMBOL
+y:IDENTIFIER
+do:KEYWORD
 
+Line:     z := z + y;
+z:IDENTIFIER
+:=:SYMBOL
+z:IDENTIFIER
++:SYMBOL
+y:IDENTIFIER
+;:SYMBOL
+
+Line:     y := y + 1
+y:IDENTIFIER
+:=:SYMBOL
+y:IDENTIFIER
++:SYMBOL
+1:NUMBER
+
+Line: endwhile
+endwhile:KEYWORD
+
+AST:
+;:SYMBOL
+	;:SYMBOL
+		;:SYMBOL
+			:=:SYMBOL
+				z:IDENTIFIER
+				0:NUMBER
+			:=:SYMBOL
+				x:IDENTIFIER
+				10:NUMBER
+		:=:SYMBOL
+			y:IDENTIFIER
+			0:NUMBER
+	while:KEYWORD
+		-:SYMBOL
+			x:IDENTIFIER
+			y:IDENTIFIER
 
