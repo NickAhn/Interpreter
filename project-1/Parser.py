@@ -137,11 +137,11 @@ class Parser:
                         self.tokens.pop(0)
                         return treeNode
                     else:
-                        raise Exception("Not an if-statement: missing an \"endif\" token")
+                        raise Exception("Not an if-statement: missing an \"endif\" token, found ", self.tokens[0].value)
                 else:
-                    raise Exception("Not an if-statement: missing an \"else\" token")
+                    raise Exception("Not an if-statement: missing an \"else\" token, found ", self.tokens[0].value)
             else:
-                raise Exception("Not an if-statement: missing a \"then\" token")
+                raise Exception("Not an if-statement: missing a \"then\" token, found ", self.tokens[0].value)
 
             
         raise Exception("Not an if-statement")
@@ -165,6 +165,7 @@ class Parser:
                 self.tokens.pop(0)
                 treeNode.rightChild = self.parseStatement()
                 if len(self.tokens) != 0 and self.tokens[0].value == "endwhile":
+                    self.tokens.pop(0)
                     return treeNode
                 raise Exception("Not a while-loop: missing an \"endwhile\" token")
             else:

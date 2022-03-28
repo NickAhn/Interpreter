@@ -31,10 +31,26 @@ z:IDENTIFIER
 y:IDENTIFIER
 ;:SYMBOL
 
-Line:     y := 3
+Line:     y := 3;
 y:IDENTIFIER
 :=:SYMBOL
 3:NUMBER
+;:SYMBOL
+
+Line:     while 9-4 do
+while:KEYWORD
+9:NUMBER
+-:SYMBOL
+4:NUMBER
+do:KEYWORD
+
+Line:         x := 90
+x:IDENTIFIER
+:=:SYMBOL
+90:NUMBER
+
+Line:     endwhile
+endwhile:KEYWORD
 
 Line: else
 else:KEYWORD
@@ -67,14 +83,22 @@ AST:
 			x:IDENTIFIER
 			5:NUMBER
 		;:SYMBOL
-			:=:SYMBOL
-				z:IDENTIFIER
-				+:SYMBOL
+			;:SYMBOL
+				:=:SYMBOL
 					z:IDENTIFIER
+					+:SYMBOL
+						z:IDENTIFIER
+						y:IDENTIFIER
+				:=:SYMBOL
 					y:IDENTIFIER
-			:=:SYMBOL
-				y:IDENTIFIER
-				3:NUMBER
+					3:NUMBER
+			while:KEYWORD
+				-:SYMBOL
+					9:NUMBER
+					4:NUMBER
+				:=:SYMBOL
+					x:IDENTIFIER
+					90:NUMBER
 		:=:SYMBOL
 			x:IDENTIFIER
 			+:SYMBOL
