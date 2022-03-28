@@ -6,6 +6,7 @@ Phase 2.1 Parser for expressions
 
 import copy
 from logging import raiseExceptions
+import string
 import Lexer
 
 
@@ -111,10 +112,20 @@ class Parser:
         
         raise Exception("Not an Assignment")
         
+    '''
+    Checks if current token is a <type> statement by matching it with <value>
+    If current token matches with <value>, return true. Otherwise, raise exception.
+    '''
+    def checkCurrToken(self, type: str, value: str) -> bool:
+        if len(self.tokens) != 0 and self.tokens[0].value == value:
+            return True
+        
+        raise Exception("\n Not a " + str(type) + ". Found \"" + self.tokens[0].value + "\", Expected \"" + str(value) + "\"")
+
 
     #ifstatement ::= if <expression> then <statement> else <statement> endif
     def parseIfStatement(self):
-        if len(self.tokens) != 0 and self.tokens[0].value == "if":
+        if self.checkCurrToken("if-statement", "if"):
             # if <expression>
             treeNode = Tree() 
             # treeNode.token = self.tokens[0] # root node = "if"
@@ -123,32 +134,48 @@ class Parser:
 
             treeNode.leftChild = self.parseExpression()
 
+        if self.checkCurrToken("if-statement", "then"):
+            self.tokens.pop(0)
+            treeNode.middleChild = self.parseStatement()
+
+        if self.checkCurrToken("if-statement", "else"):
+            self.tokens.pop(0)
+            treeNode.rightChild = self.parseStatement()
+
+        if self.checkCurrToken("if-statement", "endif"):
+            self.tokens.pop(0)
+            return treeNode
+
+        # if len(self.tokens) != 0 and self.tokens[0].value == "if":
+        #     # if <expression>
+        #     treeNode = Tree() 
+        #     # treeNode.token = self.tokens[0] # root node = "if"
+        #     treeNode.token = Lexer.Token("IF-STATEMENT", "") # root node = "if" (changed to match  example output)
+        #     self.tokens.pop(0)
+
+        #     treeNode.leftChild = self.parseExpression()
+
             # then <statement>
-            if len(self.tokens) != 0 and self.tokens[0].value == "then":
-                self.tokens.pop(0)
-                treeNode.middleChild = self.parseStatement()
+            # if len(self.tokens) != 0 and self.tokens[0].value == "then":
+            #     self.tokens.pop(0)
+            #     treeNode.middleChild = self.parseStatement()
 
-                # else <expression>
-                if len(self.tokens) != 0 and self.tokens[0].value == "else":
-                    self.tokens.pop(0)
-                    treeNode.rightChild = self.parseStatement()
+            #     # else <expression>
+            #     if len(self.tokens) != 0 and self.tokens[0].value == "else":
+            #         self.tokens.pop(0)
+            #         treeNode.rightChild = self.parseStatement()
 
-                    # check for endif
-                    if len(self.tokens) != 0 and self.tokens[0].value == "endif":
-                        self.tokens.pop(0)
-                        return treeNode
-                    else:
-                        raise Exception("Not an if-statement: missing an \"endif\" token, found ", self.tokens[0].value)
-                else:
-                    raise Exception("Not an if-statement: missing an \"else\" token, found ", self.tokens[0].value)
-            else:
-                raise Exception("Not an if-statement: missing a \"then\" token, found ", self.tokens[0].value)
-
-            
-        raise Exception("Not an if-statement")
-
-
-            # endif
+            #         # check for endif
+            #         # if len(self.tokens) != 0 and self.tokens[0].value == "endif":
+            #         #     self.tokens.pop(0)
+            #         #     return treeNode
+            #         # else:
+            #         #     raise Exception("Not an if-statement: missing an \"endif\" token, found ", self.tokens[0].value)
+            #     else:
+            #         raise Exception("Not an if-statement: missing an \"else\" token, found ", self.tokens[0].value)
+            # else:
+            #     raise Exception("Not an if-statement: missing a \"then\" token, found ", self.tokens[0].value)
+        # raise Exception("Not an if-statement")
         
 
     # whilestatement ::= while <expression> do <statement> endwhile
