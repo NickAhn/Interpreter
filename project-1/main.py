@@ -28,8 +28,10 @@ except:
 lexer = Lexer.Lexer()
 tokens_list = []
 
+lineNum = 0
 for input in input_list:
-    tokens = lexer.scan(input)
+    tokens = lexer.scan(input, lineNum)
+    lineNum+=1
     output_file.write("Line: " + input + "\n")
     for token in tokens:
         # print(token)

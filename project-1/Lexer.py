@@ -9,9 +9,10 @@ import re
 output_file = open("out.txt", "a")
 
 class Token:
-    def __init__(self, type, value) -> None:
+    def __init__(self, type: str, value: str, line: int) -> None:
         self.type = type
         self.value = value
+        self.line = line
 
     # returns string representing token as "<value> <type>" to be used in AST output (more readable to user)
     def toString(self) -> str:
@@ -31,7 +32,7 @@ class Lexer:
         }
 
 
-    def scan(self, input):
+    def scan(self, input, line):
         # print("Line: ", input)
         input_list = input.split()
         token_list = []
@@ -39,7 +40,7 @@ class Lexer:
         for input in input_list:  
             x = input
             while len(x) > 0:
-                temp = self.getTokenType(x)
+                temp = self.getTokenType(x, line)
                 if temp[0] == None:
                     print("ERROR READING ", temp[1], "\n")
                     token_list.append("ERROR READING \"" + temp[1] + "\"\n")
@@ -57,14 +58,14 @@ class Lexer:
     Returns a tuple containing Token and a substring of the input string without the token found
     If it returns None, it found and Error
     '''
-    def getTokenType(self, input):
+    def getTokenType(self, input, line):
         # key = tokenType; val = regex
         for key, val in self.t_types.items():
             match = re.match(val,input)
             if match:
                 # print(match.group(0), ": ", key)
                 temp = input[match.end():]
-                return Token(key, match.group(0)), temp
+                return Token(key, match.group(0), line), temp
 
         #ERROR
         return None, input[0]

@@ -113,19 +113,25 @@ class Parser:
         raise Exception("Not an Assignment")
         
     '''
-    Checks if current token is a <type> statement by matching it with <value>
-    If current token matches with <value>, return true. Otherwise, raise exception.
+    Checks if current token is a <statementType> statement by matching it with <match>
+    If current token matches with <match>, return true. Otherwise, raise exception.
     '''
     def checkCurrToken(self, statementType: str, match: str) -> bool:
-        if match.islower:
-            currToken = self.tokens[0].value
+        currToken = ""
+        if len(self.tokens) == 0:
+            errorMessage = ("\n Not a " + str(statementType) + ". Expected \"" + str(match) + "\" in last line")
+            raise Exception(errorMessage)
         else:
-            currToken = self.tokens[0].type
+            if match.islower:
+                currToken = self.tokens[0].value
+            else:
+                currToken = self.tokens[0].type
 
-        if len(self.tokens) != 0 and currToken == match:
-            return True
+            if currToken == match:
+                return True
         
-        raise Exception("\n Not a " + str(statementType) + ". Found \"" + currToken + "\" in line ?. Expected \"" + str(match) + "\"")
+        errorMessage = "\n Not a " + str(statementType) + ". Expected \"" + str(match) + "\" in line " + str(self.tokens[0].line)
+        raise Exception(errorMessage)
 
 
     #ifstatement ::= if <expression> then <statement> else <statement> endif
@@ -134,7 +140,7 @@ class Parser:
             # if <expression>
             treeNode = Tree() 
             # treeNode.token = self.tokens[0] # root node = "if"
-            treeNode.token = Lexer.Token("IF-STATEMENT", "") # root node = "if" (changed to match  example output)
+            treeNode.token = Lexer.Token("IF-STATEMENT", "", self.tokens[0].line) # root node = "if" (changed to match  example output)
             self.tokens.pop(0)
 
             treeNode.leftChild = self.parseExpression()
@@ -185,27 +191,46 @@ class Parser:
 
     # whilestatement ::= while <expression> do <statement> endwhile
     def parseWhileStatement(self):
-        # if self.checkCurrToken("While-Statement", "while"):
-
-        if len(self.tokens) != 0 and self.tokens[0].value == "while":
+        # while <expression>
+        if self.checkCurrToken("While-Statement", "while"):
             # while <expression>
             treeNode = Tree()
             # treeNode.token = self.tokens[0]
-            treeNode.token = Lexer.Token("WHILE-LOOP", "")
+            treeNode.token = Lexer.Token("WHILE-LOOP", "", self.tokens[0].line)
             self.tokens.pop(0)
 
             treeNode.leftChild = self.parseExpression()
+        
+        #do <statement>
+        if self.checkCurrToken("While-Statement", "do"):
+            self.tokens.pop(0)
+            treeNode.rightChild = self.parseStatement()
+        
+        # endwhile
+        if self.checkCurrToken("While-Statement", "endwhile"):
+            self.tokens.pop(0)
+            return treeNode
+        
 
-            #do <statement>
-            if len(self.tokens) != 0 and self.tokens[0].value == "do":
-                self.tokens.pop(0)
-                treeNode.rightChild = self.parseStatement()
-                if len(self.tokens) != 0 and self.tokens[0].value == "endwhile":
-                    self.tokens.pop(0)
-                    return treeNode
-                raise Exception("Not a while-loop: missing an \"endwhile\" token")
-            else:
-                raise Exception("Not a while-loop: missing a \"do\" token")
+        # if len(self.tokens) != 0 and self.tokens[0].value == "while":
+        #     # while <expression>
+        #     treeNode = Tree()
+        #     # treeNode.token = self.tokens[0]
+        #     treeNode.token = Lexer.Token("WHILE-LOOP", "")
+        #     self.tokens.pop(0)
+
+        #     treeNode.leftChild = self.parseExpression()
+
+            # # do <statement>
+            # if len(self.tokens) != 0 and self.tokens[0].value == "do":
+            #     self.tokens.pop(0)
+            #     treeNode.rightChild = self.parseStatement()
+            #     if len(self.tokens) != 0 and self.tokens[0].value == "endwhile":
+            #         self.tokens.pop(0)
+            #         return treeNode
+            #     raise Exception("Not a while-loop: missing an \"endwhile\" token")
+            # else:
+            #     raise Exception("Not a while-loop: missing a \"do\" token")
 
             
 
