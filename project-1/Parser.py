@@ -83,7 +83,10 @@ class Parser:
 
         # check for skip //TODO: skip
         elif len(self.tokens) != 0 and self.tokens[0].value == "skip":
-            return self.parseSkip()
+            treeNode = Tree()
+            treeNode.token = self.tokens[0]
+            self.tokens.pop(0)
+            return treeNode
 
         # ERROR
         raise Exception("Not a base statement\n")
