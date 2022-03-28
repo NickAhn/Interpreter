@@ -116,11 +116,16 @@ class Parser:
     Checks if current token is a <type> statement by matching it with <value>
     If current token matches with <value>, return true. Otherwise, raise exception.
     '''
-    def checkCurrToken(self, type: str, value: str) -> bool:
-        if len(self.tokens) != 0 and self.tokens[0].value == value:
+    def checkCurrToken(self, statementType: str, match: str) -> bool:
+        if match.islower:
+            currToken = self.tokens[0].value
+        else:
+            currToken = self.tokens[0].type
+
+        if len(self.tokens) != 0 and currToken == match:
             return True
         
-        raise Exception("\n Not a " + str(type) + ". Found \"" + self.tokens[0].value + "\", Expected \"" + str(value) + "\"")
+        raise Exception("\n Not a " + str(statementType) + ". Found \"" + currToken + "\" in line ?. Expected \"" + str(match) + "\"")
 
 
     #ifstatement ::= if <expression> then <statement> else <statement> endif
@@ -180,6 +185,8 @@ class Parser:
 
     # whilestatement ::= while <expression> do <statement> endwhile
     def parseWhileStatement(self):
+        # if self.checkCurrToken("While-Statement", "while"):
+
         if len(self.tokens) != 0 and self.tokens[0].value == "while":
             # while <expression>
             treeNode = Tree()
