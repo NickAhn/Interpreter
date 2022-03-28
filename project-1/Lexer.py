@@ -13,11 +13,12 @@ class Token:
         self.type = type
         self.value = value
 
-    # def print(self):
-    #     print(self.value, ":", self.type)
+    # returns string representing token as "<value> <type>" to be used in AST output (more readable to user)
+    def toString(self) -> str:
+        return self.type + " " + self.value
     
     def __str__(self) -> str:
-        return self.value + ":" + self.type
+        return self.value + " : " + self.type
 
 
 class Lexer:
@@ -43,7 +44,6 @@ class Lexer:
                     print("ERROR READING ", temp[1], "\n")
                     token_list.append("ERROR READING \"" + temp[1] + "\"\n")
                     return token_list
-                #TODO: else: add temp[0] to list of tokens
                 x = temp[1]
 
                 # Creating Token Instance
@@ -52,10 +52,13 @@ class Lexer:
         
         return token_list
     
-    #Returns a tuple containing Token Object and a substring of the input
-    # string without the token found.
-    #if it returns None, it found and Error
+
+    '''
+    Returns a tuple containing Token and a substring of the input string without the token found
+    If it returns None, it found and Error
+    '''
     def getTokenType(self, input):
+        # key = tokenType; val = regex
         for key, val in self.t_types.items():
             match = re.match(val,input)
             if match:

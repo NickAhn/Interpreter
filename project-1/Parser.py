@@ -16,15 +16,15 @@ class Tree:
 
     
     def print(self, node):
-        print(node.token.value, ":", node.token.type)
+        print(node.token.value, " : ", node.token.type)
+
 
     def inorderString(self, node, spaces:int):
-        # finalWord = word
         if node == None:
             return ""
         tabs = "\t"*spaces
         # word += tabs + str(node.token)
-        ast = tabs + str(node.token) + "\n"
+        ast = tabs + node.token.toString() + "\n"
         ast += self.inorderString(node.leftChild, spaces+1)
         ast += self.inorderString(node.middleChild, spaces+1)
         ast += self.inorderString(node.rightChild, spaces+1)
@@ -117,7 +117,8 @@ class Parser:
         if len(self.tokens) != 0 and self.tokens[0].value == "if":
             # if <expression>
             treeNode = Tree() 
-            treeNode.token = self.tokens[0] # root node = "if"
+            # treeNode.token = self.tokens[0] # root node = "if"
+            treeNode.token = Lexer.Token("IF-STATEMENT", "") # root node = "if" (changed to match  example output)
             self.tokens.pop(0)
 
             treeNode.leftChild = self.parseExpression()
@@ -155,7 +156,8 @@ class Parser:
         if len(self.tokens) != 0 and self.tokens[0].value == "while":
             # while <expression>
             treeNode = Tree()
-            treeNode.token = self.tokens[0]
+            # treeNode.token = self.tokens[0]
+            treeNode.token = Lexer.Token("WHILE-LOOP", "")
             self.tokens.pop(0)
 
             treeNode.leftChild = self.parseExpression()

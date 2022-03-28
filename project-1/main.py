@@ -37,13 +37,6 @@ for input in input_list:
         tokens_list.append(token)
     output_file.write("\n")
 
-    # if(testParser):
-    #     output_file.write("AST:\n")
-    #     parser = Parser.Parser(tokens)
-    #     # treeNode = parser.parseExpression()
-    #     treeNode = parser.parseStatement()
-    #     output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
-
 if(testParser):
         output_file.write("AST:\n")
         parser = Parser.Parser(tokens_list)
