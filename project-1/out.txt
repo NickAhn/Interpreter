@@ -16,12 +16,12 @@ y:IDENTIFIER
 0:NUMBER
 ;:SYMBOL
 
-Line: while x-y do
-while:KEYWORD
+Line: if x+5 then
+if:KEYWORD
 x:IDENTIFIER
--:SYMBOL
-y:IDENTIFIER
-do:KEYWORD
++:SYMBOL
+5:NUMBER
+then:KEYWORD
 
 Line:     z := z + y;
 z:IDENTIFIER
@@ -31,15 +31,23 @@ z:IDENTIFIER
 y:IDENTIFIER
 ;:SYMBOL
 
-Line:     y := y + 1
+Line:     y := 3
 y:IDENTIFIER
 :=:SYMBOL
-y:IDENTIFIER
-+:SYMBOL
-1:NUMBER
+3:NUMBER
 
-Line: endwhile
-endwhile:KEYWORD
+Line: else
+else:KEYWORD
+
+Line:     x := x + 3
+x:IDENTIFIER
+:=:SYMBOL
+x:IDENTIFIER
++:SYMBOL
+3:NUMBER
+
+Line: endif
+endif:KEYWORD
 
 AST:
 ;:SYMBOL
@@ -54,10 +62,10 @@ AST:
 		:=:SYMBOL
 			y:IDENTIFIER
 			0:NUMBER
-	while:KEYWORD
-		-:SYMBOL
+	if:KEYWORD
+		+:SYMBOL
 			x:IDENTIFIER
-			y:IDENTIFIER
+			5:NUMBER
 		;:SYMBOL
 			:=:SYMBOL
 				z:IDENTIFIER
@@ -66,7 +74,10 @@ AST:
 					y:IDENTIFIER
 			:=:SYMBOL
 				y:IDENTIFIER
-				+:SYMBOL
-					y:IDENTIFIER
-					1:NUMBER
+				3:NUMBER
+		:=:SYMBOL
+			x:IDENTIFIER
+			+:SYMBOL
+				x:IDENTIFIER
+				3:NUMBER
 

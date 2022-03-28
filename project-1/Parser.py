@@ -125,7 +125,7 @@ class Parser:
             # then <statement>
             if len(self.tokens) != 0 and self.tokens[0].value == "then":
                 self.tokens.pop(0)
-                treeNode.middleChild = self.parseExpression()
+                treeNode.middleChild = self.parseStatement()
 
                 # else <expression>
                 if len(self.tokens) != 0 and self.tokens[0].value == "else":
