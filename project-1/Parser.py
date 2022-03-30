@@ -12,7 +12,8 @@ import Lexer
 class Tree:
     def __init__(self) -> None:
         self.token = None
-        self.leftChild = self.middleChild = self.rightChild = None
+        self.leftChild = self.rightChild = None
+        self.middleChild = None
 
     
     def print(self, node):
@@ -58,9 +59,11 @@ class Parser:
     def parseStatement(self):
         treeNode = self.parseBaseStatement()
         while len(self.tokens) != 0 and self.tokens[0].value == ';':
-            tempNode = copy.copy(treeNode)
-
-            treeNode.token = self.tokens[0]
+            tempNode = copy.deepcopy(treeNode) # copying treeNode to make it left child of ";"
+            
+            treeNode.token = self.tokens[0] # set ";" as current treeNode
+            treeNode.middleChild = None # reset middle child
+            
             self.tokens.pop(0)
             treeNode.leftChild = tempNode
             treeNode.rightChild = self.parseBaseStatement()
