@@ -1,7 +1,7 @@
 '''
 Nicolas Ahn
 Emily Yeh
-Phase 2.1 Parser for expressions
+Phase 2.2 Parser for full language
 '''
 
 import copy
@@ -10,10 +10,11 @@ import Lexer
 
 
 class Tree:
-    def __init__(self) -> None:
-        self.token = None
-        self.leftChild = self.rightChild = None
-        self.middleChild = None
+    def __init__(self, current=None, left=None, middle=None, right=None) -> None:
+        self.token = current 
+        self.leftChild = left
+        self.rightChild = right 
+        self.middleChild = middle 
 
     
     def print(self, node):
@@ -30,7 +31,6 @@ class Tree:
         ast += self.inorderString(node.middleChild, spaces+1)
         ast += self.inorderString(node.rightChild, spaces+1)
         return ast
-
 
 
 

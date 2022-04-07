@@ -1,7 +1,7 @@
 '''
 Nicolas Ahn
 Emily Yeh
-Phase 2.1 Parser for expressions
+Phase 2.2 Parser for full language
 '''
 import sys 
 import re #regex library
@@ -12,7 +12,6 @@ import Parser
 This is the Test Driver.
 Set testParser to True if you want the Parser to run. False Otherwise
 '''
-testParser = True
 
 # Run program as: "python3 main.py <input-file> <output-file>"
 try:
@@ -37,12 +36,11 @@ for input in input_list:
         tokens_list.append(token)
     output_file.write("\n")
 
-if(testParser):
-        output_file.write("AST:\n")
-        parser = Parser.Parser(tokens_list)
-        # treeNode = parser.parseExpression()
-        treeNode = parser.parseStatement()
-        output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
+output_file.write("AST:\n")
+parser = Parser.Parser(tokens_list)
+# treeNode = parser.parseExpression()
+treeNode = parser.parseStatement()
+output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
 
 
 print("Scanning and Parsing Complete!\nCheck", sys.argv[2], "to see output")

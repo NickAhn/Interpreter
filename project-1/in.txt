@@ -1,13 +1,9 @@
-z := 0;
-x := 10;
-y := 0;
+while thomas do
+    if nathan then
+        nathan := loser
+    else
+        ethan := loser
+    endif;
 
-if x+5 then
-    z := z + y;
-    y := 3;
-    while 9-4 do
-        x := 90
-    endwhile
-else
-    x := x + 3
-endif
+    nick := loser
+endwhile
