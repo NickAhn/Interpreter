@@ -59,14 +59,15 @@ class Parser:
     def parseStatement(self):
         treeNode = self.parseBaseStatement()
         while len(self.tokens) != 0 and self.tokens[0].value == ';':
-            tempNode = copy.deepcopy(treeNode) # copying treeNode to make it left child of ";"
-            
-            treeNode.token = self.tokens[0] # set ";" as current treeNode
-            treeNode.middleChild = None # reset middle child
-            
+            '''
+            Creating the following tree:
+                        ;
+                       / \
+          baseStatement  baseStatement
+            '''
+            currentToken = self.tokens[0]
             self.tokens.pop(0)
-            treeNode.leftChild = tempNode
-            treeNode.rightChild = self.parseBaseStatement()
+            treeNode = Tree(currentToken, treeNode, None, self.parseBaseStatement())
         return treeNode
 
 
