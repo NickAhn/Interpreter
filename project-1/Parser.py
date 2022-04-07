@@ -219,12 +219,9 @@ class Parser:
                        / \
                 treeNode  element
             '''
-            tempNode = copy.copy(treeNode) # create copy of treeNode to be used as left child of current node
-            
-            treeNode.token = self.tokens[0] 
+            currentToken = self.tokens[0]
             self.tokens.pop(0)
-            treeNode.leftChild = tempNode
-            treeNode.rightChild = self.parseElement()
+            treeNode = Tree(currentToken, treeNode, None, self.parseElement())
         return treeNode
 
 
@@ -234,12 +231,10 @@ class Parser:
         treeNode = self.parsePiece()
         # create {/ piece }
         while len(self.tokens) != 0 and self.tokens[0].value == '/':
-            tempNode = copy.copy(treeNode) # create temp copy of treeNode to be used as left child of current node
-            
-            treeNode.token = self.tokens[0]
+            currentToken = self.tokens[0]  
             self.tokens.pop(0)
-            treeNode.leftChild = tempNode
-            treeNode.rightChild = self.parsePiece()
+            treeNode = Tree(currentToken, treeNode, None, self.parsePiece())
+
         return treeNode
 
 
@@ -247,12 +242,10 @@ class Parser:
     def parseTerm(self):
         treeNode = self.parseFactor()
         while len(self.tokens) != 0 and self.tokens[0].value == '-':
-            tempNode = copy.copy(treeNode) # create temp copy of treeNode to be used as left child of current node
-            
-            treeNode.token = self.tokens[0]
+            currentToken = self.tokens[0]
             self.tokens.pop(0)
-            treeNode.leftChild = tempNode 
-            treeNode.rightChild = self.parseFactor()
+            treeNode = Tree(currentToken, treeNode, None, self.parseFactor())
+
         return treeNode
     
 
@@ -260,12 +253,10 @@ class Parser:
     def parseExpression(self):
         treeNode = self.parseTerm()
         while len(self.tokens) != 0 and self.tokens[0].value == '+':
-            tempNode = copy.copy(treeNode)
-            
-            treeNode.token = self.tokens[0]
+            currentToken = self.tokens[0]
             self.tokens.pop(0)
-            treeNode.leftChild = tempNode 
-            treeNode.rightChild = self.parseTerm()            
+            treeNode = Tree(currentToken, treeNode, None, self.parseTerm())
+
         return treeNode
 
 
