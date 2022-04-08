@@ -15,13 +15,13 @@ class Evaluator:
     def __init__(self, ast:Parser.Tree) -> None:
         self.ast = ast
 
+    # Post-order traversal of the tree
     def evaluate(self, node):
         if node.token.value == "+":
             return self.evaluate(node.leftChild) + self.evaluate(node.rightChild)
         if node.token.value == "*":
             return self.evaluate(node.leftChild) * self.evaluate(node.rightChild)
         if node.token.value == "-":
-            #TODO: if result is negative, return 0
             result = self.evaluate(node.leftChild) - self.evaluate(node.rightChild)
             if result < 0:
                 return 0
@@ -33,4 +33,4 @@ class Evaluator:
             return self.evaluate(node.leftChild) // self.evaluate(node.rightChild)
 
         return int(node.token.value)
-        
+      
