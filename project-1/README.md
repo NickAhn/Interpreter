@@ -1,4 +1,5 @@
 # Instructions for building and running the program
+main.py is the **Test Driver**.
 Run main.py in the command line with the following format: <br>
 - python3 main.py [in.txt] [out.txt]
 <br>

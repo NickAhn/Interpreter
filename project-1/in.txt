@@ -1,9 +1,1 @@
-while thomas do
-    if nathan then
-        nathan := loser
-    else
-        ethan := loser
-    endif;
-
-    nick := loser
-endwhile
+3-5

@@ -1,7 +1,7 @@
 '''
 Nicolas Ahn
 Emily Yeh
-Phase 1.1: Scanner for Lexp
+Phase 2.2: Parser for full language
 '''
 
 import re

@@ -7,7 +7,7 @@ import sys
 import re #regex library
 import Lexer
 import Parser
-
+import Evaluator
 '''
 This is the Test Driver.
 Set testParser to True if you want the Parser to run. False Otherwise
@@ -38,9 +38,13 @@ for input in input_list:
 
 output_file.write("AST:\n")
 parser = Parser.Parser(tokens_list)
-# treeNode = parser.parseExpression()
-treeNode = parser.parseStatement()
+treeNode = parser.parseExpression()
+# treeNode = parser.parseStatement()
 output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
+
+ev = Evaluator.Evaluator(treeNode)
+output = ev.evaluate(treeNode)
+print(output)
 
 
 print("Scanning and Parsing Complete!\nCheck", sys.argv[2], "to see output")
