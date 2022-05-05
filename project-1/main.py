@@ -1,7 +1,7 @@
 '''
 Nicolas Ahn
 Emily Yeh
-Phase 2.2 Parser for full language
+Phase 3.1: Parser for full language
 '''
 import sys 
 import re #regex library
@@ -39,14 +39,15 @@ for input in input_list:
 # - Parse - #
 output_file.write("AST:\n")
 parser = Parser.Parser(tokens_list)
-treeNode = parser.parseExpression() # parse Expressions only
-# treeNode = parser.parseStatement() # parse Statements and expressions
+# treeNode = parser.parseExpression() # parse Expressions only
+treeNode = parser.parseStatement() # parse Statements and expressions
 output_file.write(treeNode.inorderString(treeNode, 0)+"\n")
 
 # - Evaluate - #
 ev = Evaluator.Evaluator(treeNode)
-output = ev.evaluate(treeNode)
-output_file.write("Output " + str(output))
+output = ev.evaluateStatement(treeNode)
+# output = ev.evaluate(treeNode)
+# output_file.write("Output " + str(output))
 
 
 print("Scanning and Parsing Complete!\nCheck", sys.argv[2], "to see output")

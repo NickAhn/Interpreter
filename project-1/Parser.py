@@ -1,7 +1,7 @@
 '''
 Nicolas Ahn
 Emily Yeh
-Phase 2.2 Parser for full language
+Phase 3.1 Evaluator for expressions
 '''
 
 import copy
@@ -93,7 +93,7 @@ class Parser:
             return treeNode
 
         # ERROR
-        raise Exception("Not a base statement\n")
+        raise Exception(self.tokens[0].value, " is not a base statement\n")
 
     # assignment ::= IDENTIFIER := <expression>
     def parseAssignment(self):
