@@ -1,7 +1,7 @@
 '''
 Nicolas Ahn
 Emily Yeh
-Phase 3.1: Parser for full language
+Phase 3.2: Evaluator for full language
 '''
 
 import re

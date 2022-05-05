@@ -1,7 +1,7 @@
 '''
 Nicolas Ahn
 Emily Yeh
-Phase 3.1 Evaluator for expressions
+Phase 3.2: Evaluator for full language
 '''
 
 import copy
@@ -32,6 +32,19 @@ class Tree:
         ast += self.inorderString(node.rightChild, spaces+1)
         return ast
 
+    def inorderPrint(self, node, spaces:int):
+        if node == None:
+            return ""
+        tabs = "\t"*spaces
+        # word += tabs + str(node.token)
+        ast = tabs + node.token.toString() + "\n"
+        print(ast)
+        print(self.inorderString(node.leftChild, spaces+1))
+        print(self.inorderString(node.middleChild, spaces+1))
+        print(self.inorderString(node.rightChild, spaces+1))
+        return ast
+
+
 
 
 class Parser:
@@ -52,6 +65,10 @@ class Parser:
     def __init__(self, tokens) -> None:
         self.tokens = tokens
         self.treeNode = Tree()
+
+    def printTokens(self):
+        for token in self.tokens:
+            print(token.value)
 
     # TODO: create raise Exception function and refactor code?
 
